@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import logo from '../assets/icons/logo.svg';
-import menu from '../assets/icons/nav/menu.svg';
+import logoIcon from '../assets/icons/logo.svg';
+import menuIcon from '../assets/icons/nav/menu.svg';
+import searchIcon from '../assets/icons/search.svg';
 import { navItems } from '../data/mainData';
 
 const AppBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -32,14 +34,17 @@ const AppBar = () => {
   }, []);
 
   return (
-    <header className="relative flex justify-between p-6">
-      <img src={logo} aria-role="presentation" aria-label="logo" />
+    <header
+      className="relative flex justify-between md:justify-start p-6
+        md:items-center bg-transparent"
+    >
+      <img src={logoIcon} aria-role="presentation" aria-label="logo" />
 
       <button
-        className="bg-black-alt rounded-full w-[34px] h-[34px]"
+        className="bg-dark-alt rounded-full w-[34px] h-[34px] md:hidden"
         onClick={handleOpenMenu}
       >
-        <img src={menu} aria-role="menu" className="m-auto" />
+        <img src={menuIcon} aria-role="menu" className="m-auto " />
       </button>
 
       {/* Drawer(Side-bar) that pops up on menu click */}
@@ -47,31 +52,54 @@ const AppBar = () => {
       {isOpen && (
         <div
           aria-role="menubar"
-          className="absolute top-0 right-0 h-screen bg-black-alt
-            w-8/12 z-50 js-drawer"
+          className="absolute top-0 right-0 h-screen bg-dark-alt
+            w-8/12 z-50"
           ref={ref}
         >
           <nav>
-            <ul>
+            <ul className="p-9 my-8">
               {navItems.map((item) => (
                 <li
                   key={item.icon}
                   aria-role="menuitem"
                   onClick={handleCloseMenu}
+                  className="flex items-center pb-12"
                 >
                   <img
                     src={item.icon}
-                    alt="Go to Home"
+                    alt={`Go to${item.title} page`}
                     aria-role="navigation"
+                    className="w-7 h-7"
                   />
 
-                  <p className="text-white ">{item.title}</p>
+                  <p className="text-light font-bold text-opacity-25 ml-7 text-lg">
+                    {item.title}
+                  </p>
                 </li>
               ))}
             </ul>
           </nav>
         </div>
       )}
+
+      {/* Searchbar */}
+
+      <form className="hidden md:block ml-12 w-full">
+        <div className="flex items-center text-white text-opacity-25">
+          <img src={searchIcon} aria-hidden="true" className="w-4 h-4 mr-4" />
+          <input
+            name="search-field"
+            id="search-field"
+            placeholder="Search"
+            aria-role="searchbar"
+            type="search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="bg-transparent text-sm font-semibold outline-none 
+              placeholder-white placeholder-opacity-25 w-[25%]"
+          />
+        </div>
+      </form>
     </header>
   );
 };

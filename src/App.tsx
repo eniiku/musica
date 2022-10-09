@@ -4,7 +4,7 @@ import { Home } from './pages';
 
 const App = () => {
   return (
-    <div className=" bg-black min-h-screen">
+    <div className=" bg-dark min-h-screen">
       <AppBar />
       <div>
         <Routes>

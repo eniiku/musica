@@ -6,10 +6,10 @@ import radio from '../assets/icons/nav/radio.svg';
 import video from '../assets/icons/nav/video.svg';
 
 export const navItems = [
-  { icon: home, title: 'home' },
-  { icon: playlist, title: 'my collections' },
-  { icon: radio, title: 'radio' },
-  { icon: video, title: 'music videos' },
-  { icon: profile, title: 'profile' },
-  { icon: logOut, title: 'log out' },
+  { icon: home, title: 'Home' },
+  { icon: playlist, title: 'My collections' },
+  { icon: radio, title: 'Radio' },
+  { icon: video, title: 'Music videos' },
+  { icon: profile, title: 'Profile' },
+  { icon: logOut, title: 'Log out' },
 ];
