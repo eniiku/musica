@@ -1,4 +1,4 @@
-import { DOMElement, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import logo from '../assets/icons/logo.svg';
 import menu from '../assets/icons/nav/menu.svg';
 import { navItems } from '../data/mainData';
@@ -6,21 +6,29 @@ import { navItems } from '../data/mainData';
 const AppBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const ref = useRef<HTMLDivElement>(null);
+
   // toggles menu state
 
   const handleOpenMenu = () => setIsOpen(true);
-  const handleCloseMenu = () => {
-    setIsOpen(false);
-  };
+  const handleCloseMenu = () => setIsOpen(false);
 
-  // closes Side bar by clicking outside of Sidebar's window
+  //  closes Side bar by clicking outside of Sidebar's window
 
   useEffect(() => {
-    const drawer = document.querySelector('.js-drawer');
+    // * logic to determine whether user is clicking
+    // * outside it's window or not
 
-    window.addEventListener('click', (event) => {
-      if (!drawer?.contains(event.target as HTMLInputElement)) setIsOpen(false);
-    });
+    const handleClickOutsideDrawer = (event: MouseEvent): void => {
+      if (ref.current && !ref.current.contains(event.target as Node))
+        setIsOpen(false);
+    };
+
+    window.addEventListener('mousedown', handleClickOutsideDrawer);
+
+    // ! umount event listener on clean up
+
+    return () => window.addEventListener('mousedown', handleClickOutsideDrawer);
   }, []);
 
   return (
@@ -34,13 +42,14 @@ const AppBar = () => {
         <img src={menu} aria-role="menu" className="m-auto" />
       </button>
 
-      {/* Drawer(Side-bar) that pops on menu click */}
+      {/* Drawer(Side-bar) that pops up on menu click */}
 
       {isOpen && (
         <div
           aria-role="menubar"
           className="absolute top-0 right-0 h-screen bg-black-alt
             w-8/12 z-50 js-drawer"
+          ref={ref}
         >
           <nav>
             <ul>
