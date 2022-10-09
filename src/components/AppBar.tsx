@@ -4,9 +4,30 @@ import menuIcon from '../assets/icons/nav/menu.svg';
 import searchIcon from '../assets/icons/search.svg';
 import { navItems } from '../data/mainData';
 
+const SearchBar = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  return (
+    <form className="hidden md:block ml-12 w-full">
+      <div className="flex items-center text-white text-opacity-25">
+        <img src={searchIcon} aria-hidden="true" className="w-4 h-4 mr-4" />
+        <input
+          name="search-field"
+          id="search-field"
+          placeholder="Search"
+          aria-role="searchbar"
+          type="search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="bg-transparent text-sm font-semibold outline-none 
+          placeholder-white placeholder-opacity-25 w-[25%]"
+        />
+      </div>
+    </form>
+  );
+};
+
 const AppBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -41,7 +62,7 @@ const AppBar = () => {
       <img src={logoIcon} aria-role="presentation" aria-label="logo" />
 
       <button
-        className="bg-dark-alt rounded-full w-[34px] h-[34px] md:hidden"
+        className="rounded-full w-[34px] h-[34px] md:hidden"
         onClick={handleOpenMenu}
       >
         <img src={menuIcon} aria-role="menu" className="m-auto " />
@@ -56,25 +77,26 @@ const AppBar = () => {
             w-8/12 z-50"
           ref={ref}
         >
-          <nav>
-            <ul className="p-9 my-8">
+          <nav className="relative">
+            <ul className="my-16">
               {navItems.map((item) => (
                 <li
                   key={item.icon}
                   aria-role="menuitem"
                   onClick={handleCloseMenu}
-                  className="flex items-center pb-12"
                 >
-                  <img
-                    src={item.icon}
-                    alt={`Go to${item.title} page`}
-                    aria-role="navigation"
-                    className="w-7 h-7"
-                  />
+                  <button className="flex items-center py-6 px-9 w-full">
+                    <img
+                      src={item.icon}
+                      alt={`Go to${item.title} page`}
+                      aria-role="navigation"
+                      className="w-7 h-7"
+                    />
 
-                  <p className="text-light font-bold text-opacity-25 ml-7 text-lg">
-                    {item.title}
-                  </p>
+                    <p className="text-light font-bold text-opacity-25 ml-7 text-lg">
+                      {item.title}
+                    </p>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -83,23 +105,7 @@ const AppBar = () => {
       )}
 
       {/* Searchbar */}
-
-      <form className="hidden md:block ml-12 w-full">
-        <div className="flex items-center text-white text-opacity-25">
-          <img src={searchIcon} aria-hidden="true" className="w-4 h-4 mr-4" />
-          <input
-            name="search-field"
-            id="search-field"
-            placeholder="Search"
-            aria-role="searchbar"
-            type="search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-transparent text-sm font-semibold outline-none 
-              placeholder-white placeholder-opacity-25 w-[25%]"
-          />
-        </div>
-      </form>
+      <SearchBar />
     </header>
   );
 };
