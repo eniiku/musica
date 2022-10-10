@@ -93,7 +93,7 @@ const AppBar = () => {
                       className="w-7 h-7"
                     />
 
-                    <p className="text-light font-bold text-opacity-25 ml-7 text-lg">
+                    <p className="text-light font-semibold text-opacity-25 ml-7 text-lg">
                       {item.title}
                     </p>
                   </button>
