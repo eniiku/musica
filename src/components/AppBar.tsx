@@ -14,7 +14,7 @@ const SearchBar = () => {
           name="search-field"
           id="search-field"
           placeholder="Search"
-          aria-role="searchbar"
+          role="searchbar"
           type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -55,48 +55,49 @@ const AppBar = () => {
   }, []);
 
   return (
-    <header
-      className="relative flex justify-between md:justify-start p-6
-        md:items-center bg-transparent"
-    >
-      <img src={logoIcon} aria-role="presentation" aria-label="logo" />
+    <header className="sticky md:flex md:items-center px-6 py-7 bg-transparent z-30">
+      <img
+        src={logoIcon}
+        role="presentation"
+        aria-label="logo"
+        className="inline-block"
+      />
 
       <button
-        className="rounded-full w-[34px] h-[34px] md:hidden"
+        className="rounded-full w-[34px] h-[34px] inline-block md:hidden float-right"
         onClick={handleOpenMenu}
       >
-        <img src={menuIcon} aria-role="menu" className="m-auto " />
+        <img src={menuIcon} role="menu" className="m-auto " />
       </button>
 
       {/* Drawer(Side-bar) that pops up on menu click */}
 
       {isOpen && (
         <div
-          aria-role="menubar"
-          className="absolute top-0 right-0 h-screen bg-dark-alt
-            w-8/12 z-50"
+          role="menubar"
+          className="fixed top-0 right-0 h-screen bg-dark-alt
+            w-[250px] z-50 md:hidden"
           ref={ref}
         >
-          <nav className="relative">
-            <ul className="my-16">
+          <nav>
+            <ul className="mt-14">
               {navItems.map((item) => (
-                <li
-                  key={item.icon}
-                  aria-role="menuitem"
-                  onClick={handleCloseMenu}
-                >
-                  <button className="flex items-center py-6 px-9 w-full">
+                <li key={item.icon} role="menuitem" onClick={handleCloseMenu}>
+                  <a
+                    href="#"
+                    className="flex items-center py-4 mt-3 px-9 w-full"
+                  >
                     <img
                       src={item.icon}
                       alt={`Go to${item.title} page`}
-                      aria-role="navigation"
+                      role="navigation"
                       className="w-7 h-7"
                     />
 
                     <p className="text-light font-semibold text-opacity-25 ml-7 text-lg">
                       {item.title}
                     </p>
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>

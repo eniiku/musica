@@ -8,7 +8,7 @@ const App = () => {
       <AppBar />
       <div className="flex relative">
         <SideNav />
-        <div>
+        <div className="md:ml-24">
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
