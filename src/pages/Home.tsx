@@ -9,6 +9,7 @@
 // * IMPORTS
 
 import likeIcon from '../assets/icons/like.svg';
+import { ListViewCard } from '../components';
 
 // * HERO SECTION
 
@@ -64,6 +65,16 @@ const Home = () => {
 
       <section className="mt-12">
         <h1 className="font-bold text-xl">Top charts</h1>
+
+        <div>
+          <ListViewCard
+            coverImage="#"
+            title="Golden age of 80s"
+            artist="Sean Swadder"
+            time="2:34:45"
+            favorite={false}
+          />
+        </div>
       </section>
     </main>
   );
