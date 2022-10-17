@@ -1,15 +1,20 @@
 //
 // *       CONTENT
 // ? Imports                  Line 9
-// ? Hero Section             Line 13
-// ? Top charts Section       Line ...
+// ? Hero Section             Line 15
+// ? Top charts Section       Line 60
 // ? Other sections           Line ...
 // ? Default Export           Line 61
 
 // * IMPORTS
 
+import { FreeMode } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import likeIcon from '../assets/icons/like.svg';
 import { ListViewCard } from '../components';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 // * HERO SECTION
 
@@ -56,26 +61,76 @@ const Hero = () => (
   </section>
 );
 
+// * TOP CHARTS
+
+const TopCharts = () => (
+  <section className="mt-12">
+    <h1 className="font-bold text-xl mb-5">Top charts</h1>
+
+    <Swiper
+      slidesPerView="auto"
+      spaceBetween={8}
+      centeredSlides
+      centeredSlidesBounds
+      freeMode
+      modules={[FreeMode]}
+    >
+      <SwiperSlide>
+        <ListViewCard
+          coverImage="#"
+          title="Golden age of 80s"
+          artist="Sean Swadder"
+          time="2:34:45"
+          favorite={false}
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <ListViewCard
+          coverImage="#"
+          title="Golden age of 80s"
+          artist="Sean Swadder"
+          time="2:34:45"
+          favorite={false}
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <ListViewCard
+          coverImage="#"
+          title="Golden age of 80s"
+          artist="Sean Swadder"
+          time="2:34:45"
+          favorite={false}
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <ListViewCard
+          coverImage="#"
+          title="Golden age of 80s"
+          artist="Sean Swadder"
+          time="2:34:45"
+          favorite={false}
+        />
+      </SwiperSlide>
+      <SwiperSlide>
+        <ListViewCard
+          coverImage="#"
+          title="Golden age of 80s"
+          artist="Sean Swadder"
+          time="2:34:45"
+          favorite={false}
+        />
+      </SwiperSlide>
+    </Swiper>
+  </section>
+);
+
 // * DEFAULT EXPORT
 
 const Home = () => {
   return (
-    <main className="px-6 text-white">
+    <main className="px-6 text-white min-h-screen pb-16">
       <Hero />
-
-      <section className="mt-12">
-        <h1 className="font-bold text-xl">Top charts</h1>
-
-        <div>
-          <ListViewCard
-            coverImage="#"
-            title="Golden age of 80s"
-            artist="Sean Swadder"
-            time="2:34:45"
-            favorite={false}
-          />
-        </div>
-      </section>
+      <TopCharts />
     </main>
   );
 };
