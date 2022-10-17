@@ -55,7 +55,7 @@ const AppBar = () => {
   }, []);
 
   return (
-    <header className="sticky md:flex md:items-center px-6 py-7 bg-transparent z-30">
+    <header className="sticky top-0 md:flex md:items-center px-6 py-7 bg-dark z-30">
       <img
         src={logoIcon}
         role="presentation"

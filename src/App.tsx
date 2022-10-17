@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div className=" bg-dark relative">
       <AppBar />
-      <div className="flex relative">
+      <div className="md:flex relative">
         <SideNav />
         <div className="md:ml-24">
           <Routes>
