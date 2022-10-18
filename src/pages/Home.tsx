@@ -8,19 +8,20 @@
 
 // * IMPORTS
 
-import { FreeMode } from 'swiper';
+import { FreeMode, Pagination } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import likeIcon from '../assets/icons/like.svg';
 import { AlbumCard, ListViewCard } from '../components';
-
-import 'swiper/css';
-import 'swiper/css/free-mode';
+import { useGetTopChartsQuery } from '../redux/services/musicApi';
 
 // * HERO SECTION
 
 const Hero = () => (
   <section
-    className="bg-blue-400 h-[500px] rounded-3xl
+    className="bg-blue-400 h-[500px] w-full rounded-3xl
         flex flex-col justify-between p-8 text-left"
   >
     <p className="text-xs">Curated playlist</p>
@@ -63,7 +64,7 @@ const Hero = () => (
 
 // * TOP CHARTS
 
-const TopCharts = () => (
+const TopCharts = ({ songData }: { songData: any }) => (
   <section className="mt-12">
     <h1 className="font-bold text-xl mb-5">Top charts</h1>
 
@@ -75,72 +76,58 @@ const TopCharts = () => (
       freeMode
       modules={[FreeMode]}
     >
-      <SwiperSlide>
-        <ListViewCard
-          coverImage="#"
-          title="Golden age of 80s"
-          artist="Sean Swadder"
-          time="2:34:45"
-          favorite={false}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ListViewCard
-          coverImage="#"
-          title="Golden age of 80s"
-          artist="Sean Swadder"
-          time="2:34:45"
-          favorite={false}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ListViewCard
-          coverImage="#"
-          title="Golden age of 80s"
-          artist="Sean Swadder"
-          time="2:34:45"
-          favorite={false}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ListViewCard
-          coverImage="#"
-          title="Golden age of 80s"
-          artist="Sean Swadder"
-          time="2:34:45"
-          favorite={false}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ListViewCard
-          coverImage="#"
-          title="Golden age of 80s"
-          artist="Sean Swadder"
-          time="2:34:45"
-          favorite={false}
-        />
-      </SwiperSlide>
+      {songData?.map((song: any) => (
+        <SwiperSlide>
+          <ListViewCard
+            key={song.key}
+            coverImage={song.images?.coverart}
+            title={song.title}
+            artist={song.subtitle}
+            time={song.artists.adamid}
+            favorite={false}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   </section>
 );
 
 // * NEW RELEASES
 
-const NewReleases = () => (
+const NewReleases = ({ songData }: { songData: any }) => (
   <section className="mt-12">
     <h1 className="font-bold text-xl mb-5">New releases</h1>
-    <AlbumCard coverImage="#" title="Cancelled" artist="Eminem" />
+    <Swiper
+      slidesPerView="auto"
+      spaceBetween={10}
+      centeredSlides
+      centeredSlidesBounds
+      modules={[Pagination]}
+    >
+      {songData?.map((song: any) => (
+        <SwiperSlide>
+          <AlbumCard
+            key={song.key}
+            coverImage={song.images?.coverart}
+            title={song.title}
+            artist={song.subtitle}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
   </section>
 );
 
 // * DEFAULT EXPORT
 
 const Home = () => {
+  const { data, isFetching, error } = useGetTopChartsQuery();
+
   return (
     <main className="px-6 text-white min-h-screen pb-16">
       <Hero />
-      <TopCharts />
-      <NewReleases />
+      <TopCharts songData={data} />
+      <NewReleases songData={data} />
     </main>
   );
 };
