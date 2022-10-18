@@ -11,7 +11,7 @@
 import { FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import likeIcon from '../assets/icons/like.svg';
-import { ListViewCard } from '../components';
+import { AlbumCard, ListViewCard } from '../components';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -124,6 +124,15 @@ const TopCharts = () => (
   </section>
 );
 
+// * NEW RELEASES
+
+const NewReleases = () => (
+  <section className="mt-12">
+    <h1 className="font-bold text-xl mb-5">New releases</h1>
+    <AlbumCard coverImage="#" title="Cancelled" artist="Eminem" />
+  </section>
+);
+
 // * DEFAULT EXPORT
 
 const Home = () => {
@@ -131,6 +140,7 @@ const Home = () => {
     <main className="px-6 text-white min-h-screen pb-16">
       <Hero />
       <TopCharts />
+      <NewReleases />
     </main>
   );
 };
