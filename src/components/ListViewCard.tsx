@@ -20,7 +20,6 @@ export const ListViewCard = ({
 
   const handleOnClick = () => setIsFavorite((prev: boolean) => !prev);
 
-  console.log([coverImage, title, artist, time]);
   return (
     <div
       className="flex flex-none items-start justify-between rounded-2xl p-4
