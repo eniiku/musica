@@ -8,7 +8,7 @@ export const AlbumCard = ({
   artist: string;
 }) => {
   return (
-    <div>
+    <div className="cursor-pointer">
       <img
         src={coverImage}
         alt={`Cover art for ${title}`}
