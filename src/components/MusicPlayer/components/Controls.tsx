@@ -1,8 +1,23 @@
-import nextIcon from '../../assets/icons/controls/forward.svg';
-import playIcon from '../../assets/icons/controls/play.svg';
-import previousIcon from '../../assets/icons/controls/previous.svg';
-import repeatIcon from '../../assets/icons/controls/repeat.svg';
-import shuffleIcon from '../../assets/icons/controls/shuffle.svg';
+import nextIcon from '../../../assets/icons/controls/forward.svg';
+import playIcon from '../../../assets/icons/controls/play.svg';
+import previousIcon from '../../../assets/icons/controls/previous.svg';
+import repeatIcon from '../../../assets/icons/controls/repeat.svg';
+import shuffleIcon from '../../../assets/icons/controls/shuffle.svg';
+
+const Seekbar = ({ value, min, max, onInput }: any) => {
+  return (
+    <input
+      type="range"
+      step="any"
+      value={value}
+      min={min}
+      max={max}
+      onInput={onInput}
+      className="md:block w-[750px] h-1 rounded-xl bg-white bg-opacity-5
+            text-secondary border-none"
+    />
+  );
+};
 
 export const Controls = ({
   isPlaying,
@@ -14,6 +29,11 @@ export const Controls = ({
   handlePlayPause,
   handlePrevSong,
   handleNextSong,
+
+  value,
+  min,
+  max,
+  onInput,
 }: any) => {
   return (
     <div className="flex flex-col items-center">
@@ -84,16 +104,7 @@ export const Controls = ({
           onClick={() => setRepeat((prev: any) => !prev)}
         />
       </div>
-      <input
-        type="range"
-        step="any"
-        value={25}
-        min={0}
-        max={100}
-        onInput={() => console.log('yay!')}
-        className="md:block w-[750px] h-1 rounded-xl bg-white bg-opacity-5
-            text-secondary border-none"
-      />
+      <Seekbar value={value} min={min} max={max} onInput={onInput} />
     </div>
   );
 };

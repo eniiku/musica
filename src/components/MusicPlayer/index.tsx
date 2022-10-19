@@ -5,7 +5,7 @@ import {
   playPause,
   prevSong,
 } from '../../redux/features/playerSlice';
-import { Controls, Track, Volume } from './components';
+import { Controls, Player, Track, Volume } from './components';
 
 const MusicPlayer = () => {
   const { activeSong, currentSongs, currentIndex, isActive, isPlaying } =
@@ -57,11 +57,10 @@ const MusicPlayer = () => {
       className="w-screen h-[105px] backdrop-blur-xl flex items-center
       justify-around px-12 py-8 bg-dark bg-opacity-50"
     >
-      <Track />
+      <Track activeSong={activeSong} />
 
       <Controls
         isPlaying={isPlaying}
-        isActive={isActive}
         repeat={repeat}
         setRepeat={setRepeat}
         shuffle={shuffle}
@@ -70,9 +69,30 @@ const MusicPlayer = () => {
         handlePlayPause={handlePlayPause}
         handlePrevSong={handlePrevSong}
         handleNextSong={handleNextSong}
+        value={appTime}
+        min="0"
+        max={duration}
+        onInput={(event: any) => setSeekTime(event.target.value)}
+      />
+      <Player
+        activeSong={activeSong}
+        volume={volume}
+        isPlaying={isPlaying}
+        seekTime={seekTime}
+        repeat={repeat}
+        currentIndex={currentIndex}
+        onEnded={handleNextSong}
+        onTimeUpdate={(event: any) => setAppTime(event.target.currentTime)}
+        onLoadedData={(event: any) => setDuration(event.target.duration)}
       />
 
-      <Volume />
+      <Volume
+        value={volume}
+        min="0"
+        max="1"
+        onChange={(event: any) => setVolume(event.target.value)}
+        setVolume={setVolume}
+      />
     </div>
   );
 };

@@ -1,16 +1,16 @@
-import volumeIcon from '../../assets/icons/controls/volume.svg';
+import volumeIcon from '../../../assets/icons/controls/volume.svg';
 
-export const Volume = () => {
+export const Volume = ({ value, min, max, onChange }: any) => {
   return (
     <div className="flex items-center">
       <img src={volumeIcon} role="presentation" className="w-[18px] h-[18px]" />
       <input
         type="range"
         step="any"
-        value={0.4}
-        min={0}
-        max={1}
-        onChange={() => console.log('yay!')}
+        value={value}
+        min={min}
+        max={max}
+        onChange={onChange}
         className="w-[160px] h-1 ml-2"
       />
     </div>
