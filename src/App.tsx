@@ -10,7 +10,7 @@ const App = () => {
       <div className="md:flex relative">
         <SideNav />
 
-        <div className="md:ml-24 overflow-hidden">
+        <div className="md:ml-24 overflow-hidden w-full md:mr-10">
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>

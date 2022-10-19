@@ -24,12 +24,12 @@ const heroHeight: number = 380;
 const Hero = () => (
   <section
     className={`bg-blue-400 h-[500px] md:h-[${heroHeight}px] w-full rounded-3xl
-        flex flex-col flex-none justify-between p-8 text-left md:w-[680px]
+        flex flex-col flex-none justify-between p-8 text-left md:w-full lg:w-[680px]
         `}
   >
     <p className="text-xs">Curated playlist</p>
 
-    <article className="mt-52 md:mt-0">
+    <article className="mt-32 md:mt-0">
       <h3 className="font-bold text-4xl mb-2">R & B Hits</h3>
 
       <p className="text-sm md:w-[280px]">
@@ -67,7 +67,13 @@ const Hero = () => (
 
 // * TOP CHARTS
 
-const TopCharts = ({ songData }: { songData: any }) => {
+interface DataProps {
+  songData: any;
+  loadState: any;
+  error: any;
+}
+
+const TopCharts = ({ songData, loadState, error }: DataProps) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // * handy function to set direction of Swiper
@@ -88,55 +94,69 @@ const TopCharts = ({ songData }: { songData: any }) => {
 
   return (
     <section
-      className={`mt-12 md:mt-0 md:ml-12 md:h-[${heroHeight}px] overflow-y-hidden`}
+      className={`mt-12 lg:mt-0 lg:ml-12 lg:h-[${heroHeight}px] overflow-y-hidden`}
     >
       <h1 className="font-bold text-xl mb-5 md:mb-0">Top charts</h1>
 
-      <Swiper
-        slidesPerView="auto"
-        spaceBetween={12}
-        centeredSlides
-        centeredSlidesBounds
-        freeMode={true}
-        modules={[FreeMode]}
-        direction={windowWidth > 767 ? 'vertical' : 'horizontal'}
-        className="mySwiper overflow-y-hidden"
-      >
-        {songData?.map((song: any) => (
-          <SwiperSlide className="w-fit h-fit">
-            <ListViewCard
-              key={song.key}
-              coverImage={song.images?.coverart}
-              title={song.title}
-              artist={song.subtitle}
-              time={song.artists.adamid}
-              favorite={false}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {error ? (
+        <h1 className="text-lg font-white mt-6">
+          Uh! Oh! It seems something went wrong
+        </h1>
+      ) : (
+        <Swiper
+          slidesPerView="auto"
+          spaceBetween={12}
+          centeredSlides
+          centeredSlidesBounds
+          freeMode={true}
+          modules={[FreeMode]}
+          direction={windowWidth > 1023 ? 'vertical' : 'horizontal'}
+          className="mySwiper overflow-y-hidden"
+        >
+          {songData?.map((song: any) => (
+            <SwiperSlide className="w-fit h-fit">
+              <ListViewCard
+                key={song.key}
+                coverImage={song.images?.coverart}
+                title={song.title}
+                artist={song.subtitle}
+                time={song.artists.adamid}
+                favorite={false}
+                loadState={loadState}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </section>
   );
 };
 
 // * NEW RELEASES
 
-const NewReleases = ({ songData }: { songData: any }) => (
+const NewReleases = ({ songData, loadState, error }: DataProps) => (
   <section className="mt-12">
     <h1 className="font-bold text-xl mb-5">New releases</h1>
 
-    <Swiper slidesPerView={'auto'} spaceBetween={30} className="mySwiper">
-      {songData?.map((song: any) => (
-        <SwiperSlide className="w-fit">
-          <AlbumCard
-            key={song.key}
-            coverImage={song.images?.coverart}
-            title={song.title}
-            artist={song.subtitle}
-          />
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    {error ? (
+      <h1 className="text-lg font-white">
+        Uh! Oh! It seems something went wrong
+      </h1>
+    ) : (
+      <Swiper slidesPerView={'auto'} spaceBetween={30} className="mySwiper">
+        {songData?.map((song: any) => (
+          <SwiperSlide className="w-fit">
+            <AlbumCard
+              key={song.key}
+              coverImage={song.images?.coverart}
+              title={song.title}
+              artist={song.subtitle}
+              loadState={loadState}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    )}
   </section>
 );
 
@@ -146,11 +166,11 @@ const Home = () => {
   const { data, isFetching, error } = useGetTopChartsQuery();
   return (
     <main className="px-6 text-white min-h-screen pb-16">
-      <div className="md:flex">
+      <div className="lg:flex">
         <Hero />
-        <TopCharts songData={data} />
+        <TopCharts songData={data} loadState={isFetching} error />
       </div>
-      <NewReleases songData={data} />
+      <NewReleases songData={data} loadState={isFetching} error />
     </main>
   );
 };
