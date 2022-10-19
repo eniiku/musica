@@ -13,7 +13,7 @@ const Seekbar = ({ value, min, max, onInput }: any) => {
       min={min}
       max={max}
       onInput={onInput}
-      className="md:block w-[750px] h-1 rounded-xl bg-white bg-opacity-5
+      className="hidden lg:block w-[750px] h-1 rounded-xl bg-white bg-opacity-5
             text-secondary border-none"
     />
   );
@@ -36,14 +36,14 @@ export const Controls = ({
   onInput,
 }: any) => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex items-center mb-8 ml-20">
+    <div className="block my-auto lg:flex flex-col items-center">
+      <div className="flex items-center mb-4 ">
         {/* Logic to shuffle songs */}
 
         <img
           src={shuffleIcon}
           role="presentation"
-          className="mr-10"
+          className="mr-10  hidden lg:block"
           width={16}
           color={shuffle ? 'text.secondary' : 'inherit'}
           onClick={() => setShuffle((prev: any) => !prev)}
@@ -55,7 +55,7 @@ export const Controls = ({
           <img
             src={previousIcon}
             role="presentation"
-            className="mr-10"
+            className="mr-10 hidden lg:block"
             width={16}
             onClick={handlePrevSong}
           />
@@ -87,7 +87,7 @@ export const Controls = ({
           <img
             src={nextIcon}
             role="presentation"
-            className="mr-10"
+            className="lg:mr-10"
             width={16}
             onClick={handleNextSong}
           />
@@ -98,7 +98,7 @@ export const Controls = ({
         <img
           src={repeatIcon}
           role="presentation"
-          className="mr-10"
+          className="hidden lg:block"
           width={16}
           color={repeat ? 'text.secondary' : 'inherit'}
           onClick={() => setRepeat((prev: any) => !prev)}

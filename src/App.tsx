@@ -1,9 +1,11 @@
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { AppBar, SideNav } from './components';
-import MusicPlayer from './components/MusicPlayer';
+import { AppBar, MusicPlayer, SideNav } from './components';
 import { Home } from './pages';
 
 const App = () => {
+  const { activeSong } = useSelector((state: any) => state.player);
+
   return (
     <div className=" bg-dark relative">
       <AppBar />
@@ -16,9 +18,11 @@ const App = () => {
           </Routes>
         </div>
 
-        <div className="fixed bottom-0 z-50">
-          <MusicPlayer />
-        </div>
+        {activeSong?.title && (
+          <div className="fixed bottom-0 z-50">
+            <MusicPlayer />
+          </div>
+        )}
       </div>
     </div>
   );

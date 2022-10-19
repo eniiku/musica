@@ -54,7 +54,7 @@ const MusicPlayer = () => {
 
   return (
     <div
-      className="w-screen h-[105px] backdrop-blur-xl flex items-center
+      className="w-screen h-[90px] md:h-[105px] backdrop-blur-xl flex items-center
       justify-around px-12 py-8 bg-dark bg-opacity-50"
     >
       <Track activeSong={activeSong} />
