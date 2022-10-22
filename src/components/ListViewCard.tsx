@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import favoriteIcon from '../assets/icons/favorite.svg';
+import { Favorite } from '../assets/icons';
 
 interface ListViewCardProps {
   coverImage: string;
@@ -58,7 +58,7 @@ export const ListViewCard = ({
           <h4 className="text-sm md:text-xs">{time}</h4>
         </div>
       </div>
-      <button
+      <div
         className={
           isFavorite
             ? `bg-red-600 w-[37px] h-[37px] border-[1px] border-white 
@@ -68,12 +68,8 @@ export const ListViewCard = ({
         }
         onClick={handleOnClick}
       >
-        <img
-          src={favoriteIcon}
-          role="presentation"
-          className="w-[18px] h-[18px] inline-block"
-        />
-      </button>
+        <Favorite className="w-[18px] h-[18px] inline-block" />
+      </div>
     </div>
   );
 };

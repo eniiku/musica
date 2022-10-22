@@ -11,12 +11,12 @@
 import { useEffect, useState } from 'react';
 import { FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import likeIcon from '../assets/icons/like.svg';
 import { AlbumCard, ListViewCard } from '../components';
 import { useGetTopChartsQuery } from '../redux/services/musicApi';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import { Like } from '../assets/icons';
 
 // * HERO SECTION
 
@@ -54,12 +54,9 @@ const Hero = () => (
         ))}
       </div>
 
-      <img
-        src={likeIcon}
-        role="presentation"
-        className="w-[22px] h-[22px] mx-[18px]
-          md:w-[16px] md:h-[16px]"
-      />
+      <button className="mx-[18px]">
+        <Like className="w-[22px] h-[22px] md:w-[16px] md:h-[16px]" />
+      </button>
 
       <p className="text-2xl md:text-base">33K Likes</p>
     </div>

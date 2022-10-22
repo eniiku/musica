@@ -1,8 +1,10 @@
-import nextIcon from '../../../assets/icons/controls/forward.svg';
-import playIcon from '../../../assets/icons/controls/play.svg';
-import previousIcon from '../../../assets/icons/controls/previous.svg';
-import repeatIcon from '../../../assets/icons/controls/repeat.svg';
-import shuffleIcon from '../../../assets/icons/controls/shuffle.svg';
+import {
+  Next,
+  Play,
+  Previous,
+  Repeat,
+  Shuffle,
+} from '../../../assets/icons/controls';
 
 const Seekbar = ({ value, min, max, onInput }: any) => {
   return (
@@ -40,69 +42,49 @@ export const Controls = ({
       <div className="flex items-center mb-4 ">
         {/* Logic to shuffle songs */}
 
-        <img
-          src={shuffleIcon}
-          role="presentation"
-          className="mr-10  hidden lg:block"
-          width={16}
-          color={shuffle ? 'text.secondary' : 'inherit'}
+        <button
           onClick={() => setShuffle((prev: any) => !prev)}
-        />
+          className="mr-10  hidden lg:block"
+        >
+          <Shuffle color={shuffle ? 'text.secondary' : 'inherit'} />
+        </button>
 
         {/* Logic to handle playing previous song */}
 
-        {currentSongs?.length && (
-          <img
-            src={previousIcon}
-            role="presentation"
-            className="mr-10 hidden lg:block"
-            width={16}
-            onClick={handlePrevSong}
-          />
+        {currentSongs?.length === 0 && (
+          <button className="mr-10 hidden lg:block" onClick={handlePrevSong}>
+            <Previous />
+          </button>
         )}
 
         {/* Logic to handle PlayPause Button */}
 
         {isPlaying ? (
-          <img
-            src={playIcon}
-            role="presentation"
-            className="mr-10"
-            width={25}
-            onClick={handlePlayPause}
-          />
+          <button onClick={handlePlayPause} className="mr-10 w-[25px]">
+            <Play />
+          </button>
         ) : (
-          <img
-            src={playIcon}
-            role="presentation"
-            className="mr-10"
-            width={25}
-            onClick={handlePlayPause}
-          />
+          <button className="mr-10 w-[25px]" onClick={handlePlayPause}>
+            <Play />
+          </button>
         )}
 
         {/* Logic to handle play next song */}
 
-        {currentSongs?.length && (
-          <img
-            src={nextIcon}
-            role="presentation"
-            className="lg:mr-10"
-            width={16}
-            onClick={handleNextSong}
-          />
+        {currentSongs?.length === 0 && (
+          <button className="lg:mr-10" onClick={handleNextSong}>
+            <Next />
+          </button>
         )}
 
         {/* Logic to repeat songs */}
 
-        <img
-          src={repeatIcon}
-          role="presentation"
+        <button
           className="hidden lg:block"
-          width={16}
-          color={repeat ? 'text.secondary' : 'inherit'}
           onClick={() => setRepeat((prev: any) => !prev)}
-        />
+        >
+          <Repeat color={repeat ? 'text.secondary' : 'inherit'} />
+        </button>
       </div>
       <Seekbar value={value} min={min} max={max} onInput={onInput} />
     </div>

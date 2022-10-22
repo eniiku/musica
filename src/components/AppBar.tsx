@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import logoIcon from '../assets/icons/logo.svg';
-import menuIcon from '../assets/icons/nav/menu.svg';
-import searchIcon from '../assets/icons/search.svg';
-import { navItems } from '../data/mainData';
+import { Logo, Menu, Search } from '../assets/icons/';
+import { navItems } from '../data/navData';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <form className="hidden md:block ml-12 w-full">
       <div className="flex items-center text-white text-opacity-25">
-        <img src={searchIcon} aria-hidden="true" className="w-4 h-4 mr-4" />
+        <label
+          htmlFor="search-field"
+          className="hover:stroke-secondary hover:opacity-100"
+        >
+          <Search className="w-4 h-4 mr-4 stroke-light opacity-40" />
+        </label>
         <input
           name="search-field"
           id="search-field"
@@ -56,18 +60,13 @@ const AppBar = () => {
 
   return (
     <header className="sticky top-0 md:flex md:items-center px-6 py-7 bg-dark z-30">
-      <img
-        src={logoIcon}
-        role="presentation"
-        aria-label="logo"
-        className="inline-block"
-      />
+      <Logo className="inline-block" />
 
       <button
         className="rounded-full w-[34px] h-[34px] inline-block md:hidden float-right"
         onClick={handleOpenMenu}
       >
-        <img src={menuIcon} role="menu" className="m-auto " />
+        <Menu className="m-auto stroke-light hover:stroke-secondary" />
       </button>
 
       {/* Drawer(Side-bar) that pops up on menu click */}
@@ -81,20 +80,20 @@ const AppBar = () => {
         >
           <nav>
             <ul className="mt-14">
-              {navItems.map((item) => (
-                <li key={item.icon} role="menuitem" onClick={handleCloseMenu}>
+              {navItems.map((item: any) => (
+                <li
+                  key={item.icon.toString()}
+                  role="menuitem"
+                  onClick={handleCloseMenu}
+                >
                   <a
                     href="#"
-                    className="flex items-center py-4 mt-3 px-9 w-full"
+                    className="flex items-center py-4 mt-3 px-9 w-full 
+                      hover:text-opacity-100 hover:text-secondary"
                   >
-                    <img
-                      src={item.icon}
-                      alt={`Go to${item.title} page`}
-                      role="navigation"
-                      className="w-7 h-7"
-                    />
+                    {item.icon}
 
-                    <p className="text-light font-semibold text-opacity-25 ml-7 text-lg">
+                    <p className="text-light text-opacity-25 font-semibold ml-7 text-lg">
                       {item.title}
                     </p>
                   </a>
