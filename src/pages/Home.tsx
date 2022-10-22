@@ -10,12 +10,13 @@
 
 import { useEffect, useState } from 'react';
 import { FreeMode } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/free-mode';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import likeIcon from '../assets/icons/like.svg';
 import { AlbumCard, ListViewCard } from '../components';
 import { useGetTopChartsQuery } from '../redux/services/musicApi';
+
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 // * HERO SECTION
 
@@ -69,7 +70,7 @@ const Hero = () => (
 
 interface DataProps {
   songData: any;
-  loadState: any;
+  loadState: boolean;
   error: any;
 }
 
@@ -94,11 +95,11 @@ const TopCharts = ({ songData, loadState, error }: DataProps) => {
 
   return (
     <section
-      className={`mt-12 lg:mt-0 lg:ml-12 lg:h-[${heroHeight}px] overflow-y-hidden`}
+      className={`mt-12 lg:mt-0 lg:ml-12 lg:h-[${heroHeight}px] overflow-hidden`}
     >
       <h1 className="font-bold text-xl mb-5 md:mb-0">Top charts</h1>
 
-      {error ? (
+      {error?.status === 'FETCH_ERROR' ? (
         <h1 className="text-lg font-white mt-6">
           Uh! Oh! It seems something went wrong
         </h1>
@@ -111,16 +112,15 @@ const TopCharts = ({ songData, loadState, error }: DataProps) => {
           freeMode={true}
           modules={[FreeMode]}
           direction={windowWidth > 1023 ? 'vertical' : 'horizontal'}
-          className="mySwiper overflow-y-hidden"
+          className="mySwiper "
         >
           {songData?.map((song: any) => (
-            <SwiperSlide className="w-fit h-fit">
+            <SwiperSlide key={song.key.toString()} className="w-fit h-fit">
               <ListViewCard
-                key={song.key}
                 coverImage={song.images?.coverart}
                 title={song.title}
                 artist={song.subtitle}
-                time={song.artists.adamid}
+                time={song.artists?.adamid}
                 favorite={false}
                 loadState={loadState}
               />
@@ -138,16 +138,15 @@ const NewReleases = ({ songData, loadState, error }: DataProps) => (
   <section className="mt-12">
     <h1 className="font-bold text-xl mb-5">New releases</h1>
 
-    {error ? (
+    {error?.status === 'FETCH_ERROR' ? (
       <h1 className="text-lg font-white">
         Uh! Oh! It seems something went wrong
       </h1>
     ) : (
       <Swiper slidesPerView={'auto'} spaceBetween={30} className="mySwiper">
         {songData?.map((song: any) => (
-          <SwiperSlide className="w-fit">
+          <SwiperSlide key={song.key.toString()} className="w-fit">
             <AlbumCard
-              key={song.key}
               coverImage={song.images?.coverart}
               title={song.title}
               artist={song.subtitle}
@@ -164,13 +163,16 @@ const NewReleases = ({ songData, loadState, error }: DataProps) => (
 
 const Home = () => {
   const { data, isFetching, error } = useGetTopChartsQuery();
+  console.log(data);
+  if (error) console.log(error);
+
   return (
     <main className="px-6 text-white min-h-screen pb-16">
       <div className="lg:flex">
         <Hero />
-        <TopCharts songData={data} loadState={isFetching} error />
+        <TopCharts songData={data} loadState={isFetching} error={error} />
       </div>
-      <NewReleases songData={data} loadState={isFetching} error />
+      <NewReleases songData={data} loadState={isFetching} error={error} />
     </main>
   );
 };
