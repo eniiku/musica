@@ -15,5 +15,3 @@ export const store: any = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(musicApi.middleware),
 });
-
-console.log(store);

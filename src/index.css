@@ -36,3 +36,16 @@
   width: 100%;
   height: 100%;
 }
+
+/*
+    ========================================================
+      Classes for Collection component in /pages/components
+    ========================================================
+*/
+
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  justify-items: start;
+  gap: 1rem;
+}
