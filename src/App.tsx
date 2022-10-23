@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { AppBar, MusicPlayer, SideNav } from './components';
-import { Home } from './pages';
+import { AppBar, MusicPlayer, SideNav, TopCharts } from './components';
+import { Collections, Home, LogOut, Profile, Radio, Video } from './pages';
 
 const App = () => {
   const { activeSong } = useSelector((state: any) => state.player);
 
   return (
-    <div className=" bg-dark relative">
+    <div className="bg-dark relative">
       <AppBar />
       <div className="md:flex relative">
         <SideNav />
@@ -15,6 +15,12 @@ const App = () => {
         <div className="md:ml-24 overflow-hidden w-full md:mr-10">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/top-charts/:chartsid" element={<TopCharts />} />
+            <Route path="/playlist" element={<Collections />} />
+            <Route path="/radio" element={<Radio />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/log-out" element={<LogOut />} />
           </Routes>
         </div>
 

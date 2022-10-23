@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { Logo, Menu, Search } from '../assets/icons/';
 import { navItems } from '../data/navData';
 
@@ -60,7 +61,9 @@ const AppBar = () => {
 
   return (
     <header className="sticky top-0 md:flex md:items-center px-6 py-7 bg-dark z-30">
-      <Logo className="inline-block" />
+      <NavLink to="/">
+        <Logo className="inline-block" />
+      </NavLink>
 
       <button
         className="rounded-full w-[34px] h-[34px] inline-block md:hidden float-right"
@@ -86,8 +89,8 @@ const AppBar = () => {
                   role="menuitem"
                   onClick={handleCloseMenu}
                 >
-                  <a
-                    href="#"
+                  <NavLink
+                    to={`/${item.link}`}
                     className="flex items-center py-4 mt-3 px-9 w-full 
                       hover:text-opacity-100 hover:text-secondary"
                   >
@@ -96,7 +99,7 @@ const AppBar = () => {
                     <p className="text-light text-opacity-25 font-semibold ml-7 text-lg">
                       {item.title}
                     </p>
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>

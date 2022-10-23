@@ -4,3 +4,4 @@ export { ListViewCard } from './ListViewCard';
 export { default as MusicPlayer } from './MusicPlayer';
 export { default as PlayPause } from './PlayPause';
 export { default as SideNav } from './SideNav';
+export { default as TopCharts } from './TopCharts';

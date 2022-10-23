@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { navItems } from '../data/navData';
 
 const SideNav = () => {
@@ -8,17 +9,21 @@ const SideNav = () => {
     <nav className="px-4 hidden md:block fixed">
       <ul className="bg-dark-alt rounded-full py-6 px-4 mb-8">
         {topNav.map((item: any) => (
-          <li key={item.title} role="navigation" className="mt-4">
-            {item.icon}
-          </li>
+          <NavLink to={`/${item.link}`} key={item.title}>
+            <li role="navigation" className="mt-4">
+              {item.icon}
+            </li>
+          </NavLink>
         ))}
       </ul>
 
       <ul className="bg-dark-alt rounded-full py-6 px-4">
         {bottomNav.map((item: any) => (
-          <li key={item.title} role="navigation" className="mt-4">
-            {item.icon}
-          </li>
+          <NavLink to={`/${item.link}`} key={item.title}>
+            <li role="navigation" className="mt-4">
+              {item.icon}
+            </li>
+          </NavLink>
         ))}
       </ul>
     </nav>

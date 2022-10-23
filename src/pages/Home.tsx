@@ -21,6 +21,7 @@ import { Like } from '../assets/icons';
 import { AlbumCard, ListViewCard } from '../components';
 import { useGetTopChartsQuery } from '../redux/services/musicApi';
 
+import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
@@ -123,14 +124,16 @@ const TopCharts = ({ songData, loadState, error }: DataProps) => {
         >
           {songData?.map((song: any) => (
             <SwiperSlide key={song.key.toString()} className="w-fit h-fit">
-              <ListViewCard
-                coverImage={song.images?.coverart}
-                title={song.title}
-                artist={song.subtitle}
-                time={song.artists?.adamid}
-                favorite={false}
-                loadState={loadState}
-              />
+              <Link to={`/top-charts/:${song?.adamid}`}>
+                <ListViewCard
+                  coverImage={song.images?.coverart}
+                  title={song.title}
+                  artist={song.subtitle}
+                  time={song.artists?.adamid}
+                  favorite={false}
+                  loadState={loadState}
+                />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
