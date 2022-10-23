@@ -16,7 +16,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/top-charts/:chartsid" element={<TopCharts />} />
-            <Route path="/playlist" element={<Collections />} />
+            <Route path="/collections" element={<Collections />} />
             <Route path="/radio" element={<Radio />} />
             <Route path="/video" element={<Video />} />
             <Route path="/profile" element={<Profile />} />
