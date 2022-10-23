@@ -37,6 +37,11 @@
   height: 100%;
 }
 
+.play {
+  width: 1rem;
+  height: 1rem;
+}
+
 /*
     ========================================================
       Classes for Collection component in /pages/components
