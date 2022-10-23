@@ -1,5 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { playPause, setActiveSong } from '../redux/features/playerSlice';
+import {
+  playPause,
+  setActiveSong,
+} from '../redux/features/music_player/playerSlice';
 import PlayPause from './PlayPause';
 
 interface AlbumCardProps {

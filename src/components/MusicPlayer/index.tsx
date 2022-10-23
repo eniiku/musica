@@ -4,7 +4,7 @@ import {
   nextSong,
   playPause,
   prevSong,
-} from '../../redux/features/playerSlice';
+} from '../../redux/features/music_player/playerSlice';
 import { Controls, Player, Track, Volume } from './components';
 
 const MusicPlayer = () => {
