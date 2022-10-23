@@ -30,6 +30,8 @@
     ===============================================
 */
 
+/* written in this way so elements take size from parent element */
+
 .ctrl-icon {
   width: 100%;
   height: 100%;

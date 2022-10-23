@@ -1,24 +1,32 @@
-//
-// *       CONTENT
+// ! ================================
+// #       Table Of Content
+// ! ================================
+
 // ? Imports                  Line 9
 // ? Hero Section             Line 15
 // ? Top charts Section       Line 60
+// ? New Releases Section       Line 60
 // ? Other sections           Line ...
 // ? Default Export           Line 61
 
-// * IMPORTS
+// * ================================
+// *        Imports Section
+// *  ================================
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Like } from '../assets/icons';
 import { AlbumCard, ListViewCard } from '../components';
 import { useGetTopChartsQuery } from '../redux/services/musicApi';
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { Like } from '../assets/icons';
 
-// * HERO SECTION
+// * ================================
+// *       Hero Section
+// * ================================
 
 const heroHeight: number = 380;
 
@@ -63,7 +71,9 @@ const Hero = () => (
   </section>
 );
 
-// * TOP CHARTS
+// * ================================
+// *       Top Charts Section
+// * ================================
 
 interface DataProps {
   songData: any;
@@ -129,34 +139,46 @@ const TopCharts = ({ songData, loadState, error }: DataProps) => {
   );
 };
 
-// * NEW RELEASES
+// * ================================
+// *       New Releases Section
+// * ================================
 
-const NewReleases = ({ songData, loadState, error }: DataProps) => (
-  <section className="mt-12">
-    <h1 className="font-bold text-xl mb-5">New releases</h1>
+const NewReleases = ({ songData, loadState, error }: DataProps) => {
+  const { activeSong, isPlaying } = useSelector((state: any) => state.player);
+  return (
+    <section className="mt-12">
+      <h1 className="font-bold text-xl mb-5">New releases</h1>
 
-    {error?.status === 'FETCH_ERROR' ? (
-      <h1 className="text-lg font-white">
-        Uh! Oh! It seems something went wrong
-      </h1>
-    ) : (
-      <Swiper slidesPerView={'auto'} spaceBetween={30} className="mySwiper">
-        {songData?.map((song: any) => (
-          <SwiperSlide key={song.key.toString()} className="w-fit">
-            <AlbumCard
-              coverImage={song.images?.coverart}
-              title={song.title}
-              artist={song.subtitle}
-              loadState={loadState}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    )}
-  </section>
-);
+      {error?.status === 'FETCH_ERROR' ? (
+        <h1 className="text-lg font-white">
+          Uh! Oh! It seems something went wrong
+        </h1>
+      ) : (
+        <Swiper slidesPerView={'auto'} spaceBetween={30} className="mySwiper">
+          {songData?.map((song: any, i: number) => (
+            <SwiperSlide key={song.key.toString()} className="w-fit relative">
+              <AlbumCard
+                coverImage={song.images?.coverart}
+                title={song.title}
+                artist={song.subtitle}
+                loadState={loadState}
+                songData={songData}
+                song={song}
+                isPlaying={isPlaying}
+                activeSong={activeSong}
+                i={i}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
+    </section>
+  );
+};
 
-// * DEFAULT EXPORT
+// * =====================================
+// *       Default Export (Home Section)
+// * =====================================
 
 const Home = () => {
   const { data, isFetching, error } = useGetTopChartsQuery();
