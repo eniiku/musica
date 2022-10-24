@@ -1,5 +1,6 @@
 import {
   Next,
+  Pause,
   Play,
   Previous,
   Repeat,
@@ -39,7 +40,7 @@ export const Controls = ({
 }: any) => {
   return (
     <div className="block my-auto lg:flex flex-col items-center">
-      <div className="flex items-center mb-4 ">
+      <div className="flex items-center mb-4 h-6">
         {/* Logic to shuffle songs */}
 
         <button
@@ -51,7 +52,7 @@ export const Controls = ({
 
         {/* Logic to handle playing previous song */}
 
-        {currentSongs?.length === 0 && (
+        {currentSongs?.length && (
           <button className="mr-10 hidden lg:block" onClick={handlePrevSong}>
             <Previous />
           </button>
@@ -61,7 +62,7 @@ export const Controls = ({
 
         {isPlaying ? (
           <button onClick={handlePlayPause} className="mr-10 w-[25px]">
-            <Play />
+            <Pause />
           </button>
         ) : (
           <button className="mr-10 w-[25px]" onClick={handlePlayPause}>
@@ -71,7 +72,7 @@ export const Controls = ({
 
         {/* Logic to handle play next song */}
 
-        {currentSongs?.length === 0 && (
+        {currentSongs?.length && (
           <button className="lg:mr-10" onClick={handleNextSong}>
             <Next />
           </button>

@@ -13,7 +13,7 @@ interface AlbumCardProps {
   isPlaying: boolean;
   activeSong: any;
   song: any;
-  songData: any;
+  data: any;
   i: number;
 }
 
@@ -25,7 +25,7 @@ export const AlbumCard = ({
   isPlaying,
   activeSong,
   song,
-  songData,
+  data,
   i,
 }: AlbumCardProps) => {
   const dispatch = useDispatch();
@@ -35,14 +35,14 @@ export const AlbumCard = ({
   };
 
   const handlePlay = () => {
-    dispatch(setActiveSong({ song, songData, i }));
+    dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
 
   return loadState ? (
     <div className="cursor-pointer">
       <div
-        className="w-[150px] h-[150px] rounded-3xl bg-white opacity-50
+        className="w-[150px] h-[150px] rounded-3xl bg-white opacity-40
         animate-pulse"
       />
       <h5
@@ -55,31 +55,36 @@ export const AlbumCard = ({
       ></h5>
     </div>
   ) : (
-    <div className="cursor-pointer relative group">
+    <div
+      className="cursor-pointer group"
+      onClick={() => {
+        isPlaying && activeSong?.title === title ? handlePause() : handlePlay();
+      }}
+    >
       <div>
-        <img
-          src={coverImage}
-          alt={`Cover art for ${title}`}
-          className="w-[150px] h-[150px] rounded-3xl"
-        />
-        <h5 className="text-xs my-2 text-left w-[150px]">{title}</h5>
-        <h5 className="opacity-50 text-xs w-[150px]">{artist}</h5>
-      </div>
-      <div
-        className={`absolute inset-0 justify-center items-center bg-black
-        bg-opacity-50 group-hover:flex ${
+        <div className="relative">
+          <img
+            src={coverImage}
+            alt={`Cover art for ${title}`}
+            className="w-[150px] h-[150px] rounded-3xl"
+          />
+          <div
+            className={`absolute inset-0 justify-center items-center bg-black
+        bg-opacity-50 group-hover:flex rounded-3xl ${
           activeSong?.title === song.title
             ? 'flex bg-black bg-opacity-70'
             : 'hidden'
         }`}
-      >
-        <PlayPause
-          isPlaying={isPlaying}
-          activeSong={activeSong}
-          handlePause={handlePause}
-          handlePlay={handlePlay}
-          title={title}
-        />
+          >
+            <PlayPause
+              isPlaying={isPlaying}
+              activeSong={activeSong}
+              title={title}
+            />
+          </div>
+        </div>
+        <h5 className="text-xs my-2 text-left w-[150px]">{title}</h5>
+        <h5 className="opacity-50 text-xs w-[150px]">{artist}</h5>
       </div>
     </div>
   );
