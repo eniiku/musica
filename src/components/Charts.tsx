@@ -43,14 +43,14 @@ const Charts = ({ songData, isFetching, heroHeight }: DataProps) => {
         freeMode={true}
         modules={[FreeMode]}
         direction={windowWidth > 1023 ? 'vertical' : 'horizontal'}
-        className={`mySwiper lg:h-[380px]`}
+        className={`mySwiper lg:h-[345px]`}
       >
         {isFetching
           ? ['', '', '', '', ''].map((item, index) => (
-              <SwiperSlide key={index} className="w-fit h-fit">
+              <SwiperSlide key={index} className="w-fit h-fit mt-4">
                 <div
                   key={index}
-                  className="flex flex-none items-start justify-between rounded-2xl p-4  mt-3
+                  className="flex flex-none items-start justify-between rounded-2xl p-4
                 bg-white bg-opacity-25 w-[320px] md:min-w-[420px] md:items-center animate-pulse"
                 >
                   <div className="md:flex items-center w-full">
