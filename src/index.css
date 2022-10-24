@@ -49,3 +49,14 @@
   justify-items: start;
   gap: 1rem;
 }
+
+/*
+    =================================
+      Classes for modifying Swiper
+    =================================
+*/
+
+.swiper-slide {
+  width: fit-content;
+  height: fit-content;
+}

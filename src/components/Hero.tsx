@@ -1,15 +1,9 @@
 import { Like } from '../assets/icons';
 
-const Hero = ({
-  isFetching,
-  heroHeight,
-}: {
-  isFetching: boolean;
-  heroHeight: number;
-}) => {
+const Hero = ({ isFetching }: { isFetching: boolean }) => {
   return isFetching ? (
     <section
-      className={`h-[500px] md:h-[${heroHeight}px] w-full rounded-3xl
+      className={`h-[500px] md:h-full w-full rounded-3xl
         flex flex-col flex-none justify-between p-8 md:w-full lg:w-[680px]
         bg-light bg-opacity-25 animate-pulse`}
     >
@@ -25,7 +19,7 @@ const Hero = ({
     </section>
   ) : (
     <section
-      className={`bg-blue-400 h-[500px] md:h-[${heroHeight}px] w-full rounded-3xl
+      className={`bg-blue-400 h-[500px] md:h-full w-full rounded-3xl
         flex flex-col flex-none justify-between p-8 text-left md:w-full lg:w-[680px]
         `}
     >

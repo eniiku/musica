@@ -56,7 +56,7 @@ export const AlbumCard = ({
     </div>
   ) : (
     <div
-      className="cursor-pointer group"
+      className="cursor-pointer group w-fit"
       onClick={() => {
         isPlaying && activeSong?.title === title ? handlePause() : handlePlay();
       }}
@@ -70,7 +70,7 @@ export const AlbumCard = ({
           />
           <div
             className={`absolute inset-0 justify-center items-center bg-black
-        bg-opacity-50 group-hover:flex rounded-3xl ${
+        bg-opacity-50 group-hover:flex rounded-3xl w-[150px] ${
           activeSong?.title === song.title
             ? 'flex bg-black bg-opacity-70'
             : 'hidden'
